@@ -5,20 +5,14 @@
 </head>
 
 <script language="javascript">
-	var points, i=-1, j=0;
+	var points, i_p=0, i_bk=5, j=1;
 	var Arr=[], Counts = {};
 	var arrBust=[], countBust={};
 
 	function writePoints(points) {
-		i = i+1;
-		
-		if (i > 3) {
-			j = j+1;
-			i = 0;
-		}
-		
+
 		//fill value in the table for show
-		var pos = document.getElementById('myTable').rows[i].cells[j];
+		var pos = document.getElementById('myTable').rows[i_bk].cells[j];
 		pos.innerHTML=points;
 		
 		//fill value in the Arr for count
@@ -39,23 +33,75 @@
 		}
 		
 		Statistic()
+		
+		if (j<15){
+		j = j+1;
+		document.getElementById('myTable').rows[i_bk].cells[j].innerHTML = j+"❓";
+		}
 	}		
+
+	function Pair1(){                                     
+		if (document.getElementById('myTable').rows[0].cells[j].innerHTML == ""){
+		document.getElementById('myTable').rows[0].cells[j].style.background="#91ed87"
+		document.getElementById('myTable').rows[0].cells[j].innerHTML='<font color="black">'+"O"+'</font>';
+		} else {                                
+		document.getElementById('myTable').rows[0].cells[j].innerHTML="";
+		document.getElementById('myTable').rows[0].cells[j].style.background="white"
+		}
+	}
+	
+	function Pair2(){                            
+		if (document.getElementById('myTable').rows[1].cells[j].innerHTML == ""){
+		document.getElementById('myTable').rows[1].cells[j].style.background="#91ed87"
+		document.getElementById('myTable').rows[1].cells[j].innerHTML='<font color="black">'+"O"+'</font>';
+		} else {                                
+		document.getElementById('myTable').rows[1].cells[j].innerHTML="";
+		document.getElementById('myTable').rows[1].cells[j].style.background="white"
+		}	
+	}	
+	function Pair3(){                            
+		if (document.getElementById('myTable').rows[2].cells[j].innerHTML == ""){
+		document.getElementById('myTable').rows[2].cells[j].style.background="#91ed87"
+		document.getElementById('myTable').rows[2].cells[j].innerHTML='<font color="black">'+"O"+'</font>';
+		} else {                                
+		document.getElementById('myTable').rows[2].cells[j].innerHTML="";
+		document.getElementById('myTable').rows[2].cells[j].style.background="white"
+		}	
+	}	                                                  
+	function Pair4(){                                                                 
+		if (document.getElementById('myTable').rows[3].cells[j].innerHTML == ""){
+		document.getElementById('myTable').rows[3].cells[j].style.background="#91ed87"
+		document.getElementById('myTable').rows[3].cells[j].innerHTML='<font color="black">'+"O"+'</font>';
+		} else {                                
+		document.getElementById('myTable').rows[3].cells[j].innerHTML="";
+		document.getElementById('myTable').rows[3].cells[j].style.background="white"
+		}	
+	}	                                                  
+	function Pair5(){                                                                 
+		if (document.getElementById('myTable').rows[4].cells[j].innerHTML == ""){
+		document.getElementById('myTable').rows[4].cells[j].style.background="#91ed87"
+		document.getElementById('myTable').rows[4].cells[j].innerHTML='<font color="black">'+"O"+'</font>';
+		} else {
+		document.getElementById('myTable').rows[4].cells[j].innerHTML="";
+		document.getElementById('myTable').rows[4].cells[j].style.background="white"
+		}	
+	}                                                     
+
 
 	function rmPoint(){
 		//remove value from the table
-		document.getElementById('myTable').rows[i].cells[j].innerHTML="";
-		document.getElementById('myTable').rows[i].cells[j].style.background="white";
-	
+		if (j>1){
+		
+		document.getElementById('myTable').rows[5].cells[j].innerHTML="";
+		document.getElementById('myTable').rows[5].cells[j].style.background="white";
+		document.getElementById('myTable').rows[5].cells[j-1].innerHTML="❓";
+		document.getElementById('myTable').rows[5].cells[j-1].style.background="white";
+		
 		//remove the last element in the Arr, refresh the count table
 		Arr.pop();
 		Statistic()
-	
-		i = i-1;
 		
-		if (i < 0) {
-			j = j-1;
-			i = 3;
-		}
+			j = j-1;}
 	}
 	
 	function Statistic(){
@@ -102,11 +148,11 @@
 		//document.querySelector("#perTable > td:nth-child(12)").innerHTML = ((Arr.length)/Arr.length)*100+"%";
 		
 		// Bust times
-		document.getElementById('bustTable').rows[1].cells[1].innerHTML  = arrBust.filter(x => x === 3).length;
-		document.getElementById('bustTable').rows[2].cells[1].innerHTML  = arrBust.filter(x => x === 4).length;
-		document.getElementById('bustTable').rows[3].cells[1].innerHTML  = arrBust.filter(x => x === 5).length;
-		document.getElementById('bustTable').rows[4].cells[1].innerHTML  = arrBust.filter(x => x === 6).length;
-		document.getElementById('bustTable').rows[5].cells[1].innerHTML  = arrBust.filter(x => x === 7).length;
+		document.getElementById('bustTable').rows[1].cells[0].innerHTML  = arrBust.filter(x => x === 3).length;
+		document.getElementById('bustTable').rows[1].cells[1].innerHTML  = arrBust.filter(x => x === 4).length;
+		document.getElementById('bustTable').rows[1].cells[2].innerHTML  = arrBust.filter(x => x === 5).length;
+		document.getElementById('bustTable').rows[1].cells[3].innerHTML  = arrBust.filter(x => x === 6).length;
+		document.getElementById('bustTable').rows[1].cells[4].innerHTML  = arrBust.filter(x => x === 7).length;
 	
 	}
 	
@@ -140,8 +186,8 @@
     }
 	
 	#myTable td{
-	    width: 32px;
-		height: 32px;
+	    width: 45px;
+		height: 45px;
 		border: 1px;
 		border-style: solid;
 		vertical-align: middle; 
@@ -150,36 +196,33 @@
 	
 	#bottonTable {
 		position:absolute;
-		top:  200px;
+		top:  350px;
 		left: 30px;
-    }
-	
-	#bottonTable  {
 		border: 1px solid;
 		vertical-align: middle; 
 		text-align: center; 
+		
     }
 	
-	#bottonTable{
-		height: 30px;
-	}
-	
 	#timesTable{
-		height: 30px;
+		height: 32px;
+	}
+	#timesTable td{
+		width: 45px;
 	}
 		
 	#perTable{
-		height: 30px;
+		height: 32px;
 	}
 	
 	#per_sumTable{
-		height: 30px;
+		height: 33px;
 	}
 	
 	#bustTable {
 		position:absolute;
-		top:  30px;
-		left: 580px;
+		top:  350px;
+		left: 587px;
 		
 		border: 1px solid;
 		vertical-align: middle; 
@@ -187,8 +230,8 @@
 	}
 	
 	#bustTable td{
-		height: 30px;
-		width: 35px;
+		height: 45px;
+		width: 45px;
 	}
 
 	
@@ -233,24 +276,24 @@
     }
 
 	
-		/*
+	//.button.pair { background-color: #91ed87; }
 	.buttonUnder { background-color: #ffca38; }
 	.button21 { background-color: #3289fa; }
 	.buttonOver { background-color: #fa3232; }
 
 	relative
-	.pointBack { background-color: #ffca38; }*/
-	
+	.pointBack { background-color: #ffca38; }
 
-	
 </style>
 
 <body> 
 <BR>
 
+
 <table id="myTable", border="",cellspacing="0",cellpadding="1">
+
 	<tr>
-	<td>O</td>
+	<td>P1</td>
 	<td></td>
 	<td></td>
 	<td></td>
@@ -264,43 +307,95 @@
 	<td></td>
 	<td></td>
 	<td></td>
-	</tr>
+	<td></td>
+	<td></td>
+	<td><button class="button pair" onclick="Pair1()">O</button></td>
+	</tr> 
+
+	<tr>
+	<td>P2</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td><button class="button pair" onclick="Pair2()">O</button></td>
+	</tr> 
+
+	<tr>
+	<td>P3</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td><button class="button pair" onclick="Pair3()">O</button></td>
+	</tr> 
+
+	<tr>
+	<td>P4</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td><button class="button pair" onclick="Pair4()">O</button></td>
+	</tr> 
+
+	<tr>
+	<td>P5</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td><button class="button pair" onclick="Pair5()">O</button></td>
+	</tr> 
 	
 	<tr>
+	<td><b>莊</b></td>
 	<td></td>
 	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	</tr>
-  
-	<tr>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	</tr>
-  
-	<tr>
 	<td></td>
 	<td></td>
 	<td></td>
@@ -316,7 +411,6 @@
 	<td></td>
 	<td><button class="button pointBack" onclick="rmPoint()"> ↩ </button></td>
 	</tr>  
-
 </TABLE>
 
 <BR>
@@ -375,40 +469,32 @@
 
 
 <TABLE id="bustTable", border="",cellspacing="0",cellpadding="1">
+
 <tr>
-<td colspan="3"> <b>BUST</b> &nbsp;<button class="button bustBack" onclick="rmBust()"> ↩ </button></td>
+<td rowspan="3"> <b>BUST</b> &nbsp;<button class="button bustBack" onclick="rmBust()"> ↩ </button></td>
+<td> <button class="button"  onclick="bust(3)"> &nbsp;3&nbsp; </button>   </td>
+<td> <button class="button"  onclick="bust(4)"> &nbsp;4&nbsp; </button>   </td>
+<td> <button class="button"  onclick="bust(5)"> &nbsp;5&nbsp; </button>   </td>
+<td> <button class="button"  onclick="bust(6)"> &nbsp;6&nbsp; </button>   </td>
+<td> <button class="button"  onclick="bust(7)"> >7 			  </button>   </td>
 </tr>
 
+<tr>
+<td>  0 </td>
+<td>  0 </td>
+<td>  0 </td>
+<td>  0 </td>
+<td>  0 </td>
+</tr>
 
 <tr>
-<td> <button class="button"  onclick="bust(3)"> &nbsp;3&nbsp; </button> </td>
-<td>  0     </td>
 <td> 1:1.5  </td>
+<td> 1:2  </td>
+<td> 1:4  </td>
+<td> 1:12  </td>
+<td> 1:50  </td>
 </tr>
 
-<tr>
-<td> <button class="button"  onclick="bust(4)"> &nbsp;4&nbsp; </button> </td>
-<td>  0  </td>
-<td> 1:2 </td>
-</tr>
-
-<tr>
-<td> <button class="button"  onclick="bust(5)"> &nbsp;5&nbsp; </button> </td>
-<td>   0  </td>
-<td> 1:4 </td>
-</tr>
-
-<tr>
-<td> <button class="button"  onclick="bust(6)"> &nbsp;6&nbsp; </button> </td>
-<td>   0   </td>
-<td> 1:12 </td>
-</tr>
-
-<tr>
-<td> <button class="button"  onclick="bust(7)"> >7 </button> </td>
-<td>    0  </td>
-<td> 1:50 </td>
-</tr>
 
 
 </TABLE>
