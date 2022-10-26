@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+
+<script language="javascript">
+	var points, i_p=0, i_bk=5, j=1;
+	var Arr=[], Counts = {};
+	var arrBust=[], countBust={};
+
+	function writePoints(points) {
+
+		//fill value in the table for show
+		var pos = document.getElementById('myTable').rows[i_bk].cells[j];
+		pos.innerHTML=points;
+		
+		//fill value in the Arr for count
+		Arr.push(points);
+		
+		//fill table background color
+		if (points<21){
+			pos.style.background = '#ffca38';
+		}	
+		else if (points==21){
+			pos.style.background = '#3289fa';
+			//fa3232
+			//51f057 green
+			//3289fa blue
+		}	
+		else if (points>21){
+			pos.style.background = '#fa3232';
+		}
+		
+		Statistic()
+		
+		if (j<15){
+		j = j+1;
+		document.getElementById('myTable').rows[i_bk].cells[j].innerHTML = j+"❓";
+		}
+	}		
+
+	function Pair1(){                                     
+		if (document.getElementById('myTable').rows[0].cells[j].innerHTML == ""){
+		document.getElementById('myTable').rows[0].cells[j].style.background="#91ed87"
+		document.getElementById('myTable').rows[0].cells[j].innerHTML='<font color="black">'+"O"+'</font>';
+		} else {                                
+		document.getElementById('myTable').rows[0].cells[j].innerHTML="";
+		document.getElementById('myTable').rows[0].cells[j].style.background="white"
+		}
+	}
+	
+	function Pair2(){                            
+		if (document.getElementById('myTable').rows[1].cells[j].innerHTML == ""){
+		document.getElementById('myTable').rows[1].cells[j].style.background="#91ed87"
+		document.getElementById('myTable').rows[1].cells[j].innerHTML='<font color="black">'+"O"+'</font>';
+		} else {                                
+		document.getElementById('myTable').rows[1].cells[j].innerHTML="";
+		document.getElementById('myTable').rows[1].cells[j].style.background="white"
+		}	
+	}	
+	function Pair3(){                            
+		if (document.getElementById('myTable').rows[2].cells[j].innerHTML == ""){
+		document.getElementById('myTable').rows[2].cells[j].style.background="#91ed87"
+		document.getElementById('myTable').rows[2].cells[j].innerHTML='<font color="black">'+"O"+'</font>';
+		} else {                                
+		document.getElementById('myTable').rows[2].cells[j].innerHTML="";
+		document.getElementById('myTable').rows[2].cells[j].style.background="white"
+		}	
+	}	                                                  
+	function Pair4(){                                                                 
+		if (document.getElementById('myTable').rows[3].cells[j].innerHTML == ""){
+		document.getElementById('myTable').rows[3].cells[j].style.background="#91ed87"
+		document.getElementById('myTable').rows[3].cells[j].innerHTML='<font color="black">'+"O"+'</font>';
+		} else {                                
+		document.getElementById('myTable').rows[3].cells[j].innerHTML="";
+		document.getElementById('myTable').rows[3].cells[j].style.background="white"
+		}	
+	}	                                                  
+	function Pair5(){                                                                 
+		if (document.getElementById('myTable').rows[4].cells[j].innerHTML == ""){
+		document.getElementById('myTable').rows[4].cells[j].style.background="#91ed87"
+		document.getElementById('myTable').rows[4].cells[j].innerHTML='<font color="black">'+"O"+'</font>';
+		} else {
+		document.getElementById('myTable').rows[4].cells[j].innerHTML="";
+		document.getElementById('myTable').rows[4].cells[j].style.background="white"
+		}	
+	}                                                     
+
+
+	function rmPoint(){
+		//remove value from the table
+		if (j>1){
+		
+		document.getElementById('myTable').rows[5].cells[j].innerHTML="";
+		document.getElementById('myTable').rows[5].cells[j].style.background="white";
+		document.getElementById('myTable').rows[5].cells[j-1].innerHTML="❓";
+		document.getElementById('myTable').rows[5].cells[j-1].style.background="white";
+		
+		//remove the last element in the Arr, refresh the count table
+		Arr.pop();
+		Statistic()
+		
+			j = j-1;}
+	}
+	
+	function Statistic(){
+		
+		//Times
+		document.querySelector("#timesTable > td:nth-child(2)").innerHTML  = Arr.filter(x => x === 17).length;
+		document.querySelector("#timesTable > td:nth-child(3)").innerHTML  = Arr.filter(x => x === 18).length;
+		document.querySelector("#timesTable > td:nth-child(4)").innerHTML  = Arr.filter(x => x === 19).length;
+		document.querySelector("#timesTable > td:nth-child(5)").innerHTML  = Arr.filter(x => x === 20).length;
+		document.querySelector("#timesTable > td:nth-child(6)").innerHTML  = Arr.filter(x => x === 21).length;
+		document.querySelector("#timesTable > td:nth-child(7)").innerHTML  = Arr.filter(x => x === 22).length;
+		document.querySelector("#timesTable > td:nth-child(8)").innerHTML  = Arr.filter(x => x === 23).length;
+		document.querySelector("#timesTable > td:nth-child(9)").innerHTML  = Arr.filter(x => x === 24).length;
+		document.querySelector("#timesTable > td:nth-child(10)").innerHTML = Arr.filter(x => x === 25).length;
+		document.querySelector("#timesTable > td:nth-child(11)").innerHTML = Arr.filter(x => x === 26).length;
+		//document.querySelector("#timesTable > td:nth-child(12)").innerHTML = Arr.length;
+		
+		document.querySelector("#per_sumTable > td:nth-child(2)").innerHTML = 
+		((( Arr.filter(x => x === 17).length+
+			Arr.filter(x => x === 18).length+
+			Arr.filter(x => x === 19).length+
+			Arr.filter(x => x === 20).length+
+			Arr.filter(x => x === 21).length )/Arr.length)*100).toFixed(0)+"%";
+		
+		document.querySelector("#per_sumTable > td:nth-child(3)").innerHTML = 
+		((( Arr.filter(x => x === 22).length+
+			Arr.filter(x => x === 23).length+
+			Arr.filter(x => x === 24).length+
+			Arr.filter(x => x === 25).length+
+			Arr.filter(x => x === 26).length )/Arr.length)*100).toFixed(0)+"%";
+		
+	
+		//%Percentage
+		document.querySelector("#perTable > td:nth-child(2)").innerHTML  = (((Arr.filter(x => x === 17).length)/Arr.length)*100).toFixed(0)+"%";
+		document.querySelector("#perTable > td:nth-child(3)").innerHTML  = (((Arr.filter(x => x === 18).length)/Arr.length)*100).toFixed(0)+"%";
+		document.querySelector("#perTable > td:nth-child(4)").innerHTML  = (((Arr.filter(x => x === 19).length)/Arr.length)*100).toFixed(0)+"%";
+		document.querySelector("#perTable > td:nth-child(5)").innerHTML  = (((Arr.filter(x => x === 20).length)/Arr.length)*100).toFixed(0)+"%";
+		document.querySelector("#perTable > td:nth-child(6)").innerHTML  = (((Arr.filter(x => x === 21).length)/Arr.length)*100).toFixed(0)+"%";
+		document.querySelector("#perTable > td:nth-child(7)").innerHTML  = (((Arr.filter(x => x === 22).length)/Arr.length)*100).toFixed(0)+"%";
+		document.querySelector("#perTable > td:nth-child(8)").innerHTML  = (((Arr.filter(x => x === 23).length)/Arr.length)*100).toFixed(0)+"%";
+		document.querySelector("#perTable > td:nth-child(9)").innerHTML  = (((Arr.filter(x => x === 24).length)/Arr.length)*100).toFixed(0)+"%";
+		document.querySelector("#perTable > td:nth-child(10)").innerHTML = (((Arr.filter(x => x === 25).length)/Arr.length)*100).toFixed(0)+"%";
+		document.querySelector("#perTable > td:nth-child(11)").innerHTML = (((Arr.filter(x => x === 26).length)/Arr.length)*100).toFixed(0)+"%";
+		//document.querySelector("#perTable > td:nth-child(12)").innerHTML = ((Arr.length)/Arr.length)*100+"%";
+		
+		// Bust times
+		document.getElementById('bustTable').rows[1].cells[0].innerHTML  = arrBust.filter(x => x === 3).length;
+		document.getElementById('bustTable').rows[1].cells[1].innerHTML  = arrBust.filter(x => x === 4).length;
+		document.getElementById('bustTable').rows[1].cells[2].innerHTML  = arrBust.filter(x => x === 5).length;
+		document.getElementById('bustTable').rows[1].cells[3].innerHTML  = arrBust.filter(x => x === 6).length;
+		document.getElementById('bustTable').rows[1].cells[4].innerHTML  = arrBust.filter(x => x === 7).length;
+	
+	}
+	
+	function bust(n) {
+		arrBust.push(n);
+		Statistic()
+	}
+
+	function rmBust(){
+		arrBust.pop();
+		Statistic()
+	
+	}
+
+
+</script>
+
+<style>
+	
+	
+	#myTable {
+		position:absolute;
+		top:  30px;
+		left: 30px;
+    }
+	
+	#myTable tr{
+		border: 1px;
+		border-style: solid;
+
+    }
+	
+	#myTable td{
+	    width: 45px;
+		height: 45px;
+		border: 1px;
+		border-style: solid;
+		vertical-align: middle; 
+		text-align: center; 
+    }
+	
+	#bottonTable {
+		position:absolute;
+		top:  350px;
+		left: 30px;
+		border: 1px solid;
+		vertical-align: middle; 
+		text-align: center; 
+		
+    }
+	
+	#timesTable{
+		height: 32px;
+	}
+	#timesTable td{
+		width: 45px;
+	}
+		
+	#perTable{
+		height: 32px;
+	}
+	
+	#per_sumTable{
+		height: 33px;
+	}
+	
+	#bustTable {
+		position:absolute;
+		top:  350px;
+		left: 587px;
+		
+		border: 1px solid;
+		vertical-align: middle; 
+		text-align: center; 
+	}
+	
+	#bustTable td{
+		height: 45px;
+		width: 45px;
+	}
+
+	
+	.button {
+    border: none;
+    color: black;
+    padding: 10px 10px;
+    text-align: center;
+    /*text-decoration: none;
+    display: inline-block;*/
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+	border-radius: 20px;
+	box-shadow: 1px 3px 3px 0px #969493;
+	}
+	
+	button.button.pointBack {
+		/*
+		position:absolute;
+		top:  150px;
+		left: 500px;
+		*/
+		border: none;
+		color: black;
+		padding: 3px 8px;
+		font-size: 14px;
+		margin: 4px 2px;
+		cursor: pointer;
+		border-radius: 20px;
+    }
+	
+	button.button.bustBack {
+		border: none;
+		color: black;
+		padding: 3px 8px;
+		text-align: center;
+		font-size: 14px;
+		margin: 4px 2px;
+		cursor: pointer;
+		border-radius: 20px;
+    }
+
+	
+	//.button.pair { background-color: #91ed87; }
+	.buttonUnder { background-color: #ffca38; }
+	.button21 { background-color: #3289fa; }
+	.buttonOver { background-color: #fa3232; }
+
+	relative
+	.pointBack { background-color: #ffca38; }
+
+</style>
+
+<body> 
+<BR>
+
+
+<table id="myTable", border="",cellspacing="0",cellpadding="1">
+
+	<tr>
+	<td>P1</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td><button class="button pair" onclick="Pair1()">O</button></td>
+	</tr> 
+
+	<tr>
+	<td>P2</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td><button class="button pair" onclick="Pair2()">O</button></td>
+	</tr> 
+
+	<tr>
+	<td>P3</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td><button class="button pair" onclick="Pair3()">O</button></td>
+	</tr> 
+
+	<tr>
+	<td>P4</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td><button class="button pair" onclick="Pair4()">O</button></td>
+	</tr> 
+
+	<tr>
+	<td>P5</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td><button class="button pair" onclick="Pair5()">O</button></td>
+	</tr> 
+	
+	<tr>
+	<td><b>莊</b></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td><button class="button pointBack" onclick="rmPoint()"> ↩ </button></td>
+	</tr>  
+</TABLE>
+
+<BR>
+<TABLE id="bottonTable", border="",cellspacing="0",cellpadding="1">
+<tr>
+<td> </td>
+<td><button class="button buttonUnder" onclick="writePoints(17)">17 </button>   </td>
+<td><button class="button buttonUnder" onclick="writePoints(18)">18 </button>   </td>
+<td><button class="button buttonUnder" onclick="writePoints(19)">19 </button>   </td>
+<td><button class="button buttonUnder" onclick="writePoints(20)">20 </button>   </td>
+<td><button class="button button21"    onclick="writePoints(21)">21 </button>   </td>
+         
+<td><button class="button buttonOver"  onclick="writePoints(22)">22 </button>   </td>
+<td><button class="button buttonOver"  onclick="writePoints(23)">23 </button>   </td>
+<td><button class="button buttonOver"  onclick="writePoints(24)">24 </button>   </td>
+<td><button class="button buttonOver"  onclick="writePoints(25)">25 </button>   </td>
+<td><button class="button buttonOver"  onclick="writePoints(26)">26 </button>   </td>
+<!--<td>SUM</td>*/-->
+</tr>
+
+<tr id="timesTable">
+<td> Times </td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+</tr>
+
+<tr id="perTable">
+<td> % </td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+</tr>
+
+<tr id="per_sumTable">
+<td> %Sum  </td>
+<td colspan="5"></td>
+<td colspan="5"></td>
+</TABLE>
+
+
+
+
+<TABLE id="bustTable", border="",cellspacing="0",cellpadding="1">
+
+<tr>
+<td rowspan="3"> <b>BUST</b> &nbsp;<button class="button bustBack" onclick="rmBust()"> ↩ </button></td>
+<td> <button class="button"  onclick="bust(3)"> &nbsp;3&nbsp; </button>   </td>
+<td> <button class="button"  onclick="bust(4)"> &nbsp;4&nbsp; </button>   </td>
+<td> <button class="button"  onclick="bust(5)"> &nbsp;5&nbsp; </button>   </td>
+<td> <button class="button"  onclick="bust(6)"> &nbsp;6&nbsp; </button>   </td>
+<td> <button class="button"  onclick="bust(7)"> >7 			  </button>   </td>
+</tr>
+
+<tr>
+<td>  0 </td>
+<td>  0 </td>
+<td>  0 </td>
+<td>  0 </td>
+<td>  0 </td>
+</tr>
+
+<tr>
+<td> 1:1.5  </td>
+<td> 1:2  </td>
+<td> 1:4  </td>
+<td> 1:12  </td>
+<td> 1:50  </td>
+</tr>
+
+
+
+</TABLE>
+
+
+</body>
+</html> 
